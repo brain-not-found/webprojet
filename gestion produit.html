@@ -6,9 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>Karma - Statistique</title>
-    <!-- Favicon-->
+      <!-- Favicon-->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-
+ <!-- Range Slider Css -->
+    <link href="plugins/ion-rangeslider/css/ion.rangeSlider.css" rel="stylesheet" />
+    <link href="plugins/ion-rangeslider/css/ion.rangeSlider.skinFlat.css" rel="stylesheet" />
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
@@ -21,9 +23,18 @@
 
     <!-- Animation Css -->
     <link href="plugins/animate-css/animate.css" rel="stylesheet" />
-
-    <!-- Morris Chart Css-->
+<!-- Morris Chart Css-->
     <link href="plugins/morrisjs/morris.css" rel="stylesheet" />
+    <!-- Bootstrap Material Datetime Picker Css -->
+    <link href="plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet" />
+
+    <!-- Bootstrap DatePicker Css -->
+    <link href="plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <!-- Wait Me Css -->
+    <link href="plugins/waitme/waitMe.css" rel="stylesheet" />
+
+    <!-- Bootstrap Select Css -->
+    <link href="plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
 
     <!-- Custom Css -->
     <link href="css/style.css" rel="stylesheet">
@@ -70,7 +81,7 @@
             <div class="navbar-header">
                 <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                 <a href="javascript:void(0);" class="bars"></a>
-                <a class="navbar-brand" href="index.html">Statistique </a>
+                <a class="navbar-brand" href="index.html">Gestion des Produits</a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                     <!-- Call Search -->
@@ -110,22 +121,32 @@
                     <li >
                         <a href="index.html">
                             <i class="material-icons">home</i>
-                            <span>Mise En page</span>
+                            <span>mise En page</span>
                         </a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="Statistique.html">
                             <i class="material-icons">text_fields</i>
                             <span>Statistique</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="gestion produit.html">
+                    <li >
+                        <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">layers</i>
                             <span>Gestion de produits</span>
                         </a>
-                    </li>
-                    <li>
+ <ul class="ml-menu">
+                            <li>
+                                <a>Ajouter produit</a>
+                            </li>
+                            <li>
+                                <a >Ajouter Categories</a>
+                            </li>
+                            
+                        </ul>
+
+                   </li>
+                   <li >
                         <a href="gestion livraison.html" >
                             <i class="material-icons">widgets</i>
                             <span>Gestion de livraison</span>
@@ -183,14 +204,66 @@
             </div>
         </div>
     </section>
+<!-- BOOOODDDDDYYYYYYYY -->
 
+<section class="content">
+        <div class="container-fluid">
+        	<div class="row clearfix">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="card">
+                        <div class="header">
+                            <h2>
+                               liste de produit
+                            </h2>
+                            <ul class="header-dropdown m-r--5">
+                                <li class="dropdown">
+                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <i class="material-icons">more_vert</i>
+                                    </a>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a href="javascript:void(0);" class=" waves-effect waves-block">Action</a></li>
+                                        <li><a href="javascript:void(0);" class=" waves-effect waves-block">Another action</a></li>
+                                        <li><a href="javascript:void(0);" class=" waves-effect waves-block">Something else here</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="body table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>NAME</th>
+                                        <th>PRIX</th>
+                                        <th>CATEGORIE</th>
+                                        <th>QUANTITE</th>
+                                        <th>DESC</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                 
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<!-- HEAAADDDDDDD -->
+           	</div>
+    </section>
+<!-- FIN BODDDDYYYY -->
     <!-- Jquery Core Js -->
+        <!-- Jquery Core Js -->
     <script src="plugins/jquery/jquery.min.js"></script>
 
     <!-- Bootstrap Core Js -->
     <script src="plugins/bootstrap/js/bootstrap.js"></script>
 
     <!-- Select Plugin Js -->
+    <script src="plugins/bootstrap-select/js/bootstrap-select.js"></script>
+    
+      <!-- Select Plugin Js -->
     <script src="plugins/bootstrap-select/js/bootstrap-select.js"></script>
 
     <!-- Slimscroll Plugin Js -->
@@ -199,17 +272,12 @@
     <!-- Waves Effect Plugin Js -->
     <script src="plugins/node-waves/waves.js"></script>
 
-    <!-- Jquery CountTo Plugin Js -->
-    <script src="plugins/jquery-countto/jquery.countTo.js"></script>
-
-    <!-- Morris Plugin Js -->
+    <!-- Autosize Plugin Js -->
+    <script src="plugins/autosize/autosize.js"></script>
+ <!-- Morris Plugin Js -->
     <script src="plugins/raphael/raphael.min.js"></script>
     <script src="plugins/morrisjs/morris.js"></script>
-
-    <!-- ChartJs -->
-    <script src="plugins/chartjs/Chart.bundle.js"></script>
-
-    <!-- Flot Charts Plugin Js -->
+<!-- Flot Charts Plugin Js -->
     <script src="plugins/flot-charts/jquery.flot.js"></script>
     <script src="plugins/flot-charts/jquery.flot.resize.js"></script>
     <script src="plugins/flot-charts/jquery.flot.pie.js"></script>
@@ -218,13 +286,27 @@
 
     <!-- Sparkline Chart Plugin Js -->
     <script src="plugins/jquery-sparkline/jquery.sparkline.js"></script>
+    <!-- Moment Plugin Js -->
+    <script src="plugins/momentjs/moment.js"></script>
+
+    <!-- Bootstrap Material Datetime Picker Plugin Js -->
+    <script src="plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+
+    <!-- Bootstrap Datepicker Plugin Js -->
+    <script src="plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 
     <!-- Custom Js -->
     <script src="js/admin.js"></script>
-    <script src="js/pages/index.js"></script>
+    <script src="js/pages/forms/basic-form-elements.js"></script>
+    
 
+ <!-- RangeSlider Plugin Js -->
+    <script src="plugins/ion-rangeslider/js/ion.rangeSlider.js"></script>
+        <script src="js/pages/ui/range-sliders.js"></script>
     <!-- Demo Js -->
     <script src="js/demo.js"></script>
+
+   
 </body>
 
 </html>
