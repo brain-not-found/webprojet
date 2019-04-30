@@ -52,6 +52,45 @@ function affichercommande ($commande){
             die('Erreur: '.$e->getMessage());
         }	
 	}
+
+	function parnom(){
+		//$sql="SElECT * From commande e inner join formationphp.commande a on e.cin= a.cin";
+		$sql="SELECT * From commande ORDER BY nom DESC";
+		$db = config::getConnexion();
+		try{
+		$liste=$db->query($sql);
+		return $liste;
+		}
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }	
+	}
+
+	function parprenom(){
+		//$sql="SElECT * From commande e inner join formationphp.commande a on e.cin= a.cin";
+		$sql="SELECT * From commande ORDER BY prenom DESC";
+		$db = config::getConnexion();
+		try{
+		$liste=$db->query($sql);
+		return $liste;
+		}
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }	
+	}
+
+	function parnum(){
+		//$sql="SElECT * From commande e inner join formationphp.commande a on e.cin= a.cin";
+		$sql="SELECT * From commande ORDER BY numcommande ASC";
+		$db = config::getConnexion();
+		try{
+		$liste=$db->query($sql);
+		return $liste;
+		}
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }	
+	}
 	function supprimercommande($nom){
 		$sql="DELETE FROM commande where nom= :nom";
 		$db = config::getConnexion();
@@ -100,7 +139,7 @@ try{
 		
 	}
 	function recuperercommande($nom){
-		$sql="SELECT * from commande where nom=$nom";
+		$sql="SELECT * from commande where nom='$nom'";
 		$db = config::getConnexion();
 		try{
 		$liste=$db->query($sql);

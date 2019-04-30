@@ -1,7 +1,6 @@
 <?PHP
 include "../core/commandeC.php";
 $commande1C=new commandeC();
-$listecommandes=$commande1C->affichercommandes();
 
 //var_dump($listecommandes->fetchAll());
 ?>
@@ -140,7 +139,43 @@ $listecommandes=$commande1C->affichercommandes();
         <div class="billing_details">
             <div class="row">
                 <div class="col-lg-8">
-                    
+   
+   <form method="POST"> 
+<select name="tri">
+	<option value=""></option>
+	<option value="par nom">par nom</option>
+	<option value="par prenom">par prenom</option>
+	<option value="par numcommande">par numcommande</option>
+</select>
+<input type="submit" name="trier" value="trier">
+</form>
+
+
+<?php
+$listecommandes=$commande1C->affichercommandes();
+
+if(isset($_POST['tri']))
+{
+if ($_POST['tri']=='par nom') {
+$listecommandes=$commande1C->parnom();
+
+}
+if ($_POST['tri']=='par prenom') {
+$listecommandes=$commande1C->parprenom();
+
+}
+if ($_POST['tri']=='par numcommande') {
+$listecommandes=$commande1C->parnum();
+
+}
+else
+{
+$listecommandes=$commande1C->affichercommandes();
+}
+}
+?>
+
+
 
                     <table border="1">
 <tr>
@@ -154,6 +189,9 @@ $listecommandes=$commande1C->affichercommandes();
 <td>supprimer</td>
 <td>modifier</td>
 </tr>
+
+
+
 
 <?PHP
 foreach($listecommandes as $row){
@@ -180,3 +218,54 @@ foreach($listecommandes as $row){
 </table>
 
 
+<form method="POST">
+<input type="text" name="find" required>
+<input type="submit" name="sub" value="recherche">
+</form>
+
+
+
+ <table border="1">
+<tr>
+<td>Nom</td>
+<td>prenom</td>
+<td>Num telephone</td>
+<td>Adresse</td>
+<td>cmd</td>
+<td>Num commande</td>
+<td>Etat ommande</td>
+<td>supprimer</td>
+<td>modifier</td>
+</tr>
+
+
+
+
+<?PHP
+if (isset($_POST['find'])) {
+
+$result1=$commande1C->recuperercommande($_POST['find']);
+
+foreach($result1 as $row){
+  ?>
+  <tr>
+  <td><?PHP echo $row['nom']; ?></td>
+  <td><?PHP echo $row['prenom']; ?></td>
+  <td><?PHP echo $row['numtelephone']; ?></td>
+  <td><?PHP echo $row['adresse']; ?></td>
+  <td><?PHP echo $row['cmd']; ?></td>
+  <td><?PHP echo $row['numcommande']; ?></td>
+  <td><?PHP echo $row['etatcommande']; ?></td>
+  <td><form method="POST" action="supprimercommande.php">
+  <input type="submit" name="supprimer" value="supprimer">
+  <input type="hidden" value="<?PHP echo $row['nom']; ?>" name="nom">
+  </form>
+  </td>
+  <td><a href="modifiercommande.php?cin=<?PHP echo $row['nom']; ?>">
+  Modifier</a></td>
+  </tr>
+  <?PHP
+}
+}
+?>
+</table>
