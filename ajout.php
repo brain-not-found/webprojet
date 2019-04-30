@@ -14,7 +14,6 @@ $livreur1C->ajouterLivreur($livreur1);
 
 
 
-
 <!DOCTYPE html>
 
 <html>
@@ -192,18 +191,18 @@ $livreur1C->ajouterLivreur($livreur1);
     <br><br><br><br>
     
                         <table class="tablexx">
-    <tr><td>cin</td></p><td><input type="text" name="cin" required id="cin"></td></tr>
+    <tr><td>cin</td></p><td><input type="tel" name="cin" pattern=".{8,8}" required id="cin"></td></tr>
     <tr><td>nom</td></p><td><input type="text" name="nom" required id="nom"></td></tr>
     <tr><td>prenom</td><td><input type="text" name="prenom" required id="prenom"></td></tr>
     <tr><td>date de naissance</td></p><td><input type="text" name="datedenaissance" required id="datedenaissance"></td></tr>
-    <tr><td>numero de telephone</td><td><input type="text" name="numerodetelephone" required id="numerodetelephone"></td></tr>
+    <tr><td>numero de telephone</td><td><input type="text" name="numerodetelephone" pattern=".{8,8}" required id="numerodetelephone"></td></tr>
     <tr><td>adresse</td></p><td><input type="text" name="adresse" required id="adresse"></td></tr>
     <tr><td>salaire</td><td><input type="text" name="salaire" required id="salaire"></td></tr>
     <tr><td>heure de travail</td></p><td><input type="text" name="heuredetravail" required id="heuredetravail"></td></tr>
     <tr><td>date de travail</td><td><input type="text" name="datedetravail" required id="datedetravail"></td></tr>
   </table>
   <label class="validerxx" class="valider3x">
-    <input type="submit" name="button" value="ajouter" class="validerxx"  >
+    <input type="submit" name="button" value="ajouter" class="validerxx" onclick="return verifa()" >
 </label>
 
   <a class="validerxx" href="gestionlivraison.php">retour</a>

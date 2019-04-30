@@ -1,9 +1,9 @@
 <?PHP
-include "../entities/livraisonn.php";
-include "../core/livraisonnC.php";
+include "../entities/livraison.php";
+include "../core/livraisonC.php";
 if (isset($_GET['identifiant'])){
-	$livraisonnC=new livraisonnC();
-    $result=$livraisonnC->recupererlivraisonn($_GET['identifiant']);
+	$livraisonC=new livraisonC();
+    $result=$livraisonC->recupererlivraison($_GET['identifiant']);
 	foreach($result as $row){
 		$identifiant=$row['identifiant'];
 		$produit=$row['produit'];
@@ -14,9 +14,9 @@ if (isset($_GET['identifiant'])){
 <head>
 </head>
 <body>
-<form method="POST" accept="afficher.php">
+<form method="POST" accept="afficherr.php">
 <table>
-<caption>modifier livraisonn</caption>
+<caption>modifier livraison</caption>
 <tr>
 <td>identifiant</td>
 <td><input type="number" name="identifiant" value="<?PHP echo $identifiant ?>"></td>
@@ -48,10 +48,31 @@ if (isset($_GET['identifiant'])){
 	}
 }
 if (isset($_POST['modifier'])){
-	$livraisonn=new livraisonn($_POST['identifiant'],$_POST['produit'],$_POST['quantite'],$_POST['adresse'],$_POST['numerodetelephone']);
-	$livraisonnC->modifierlivraisonn($livraisonn,$_POST['identifiant']);
+	$livraison=new livraison($_POST['identifiant'],$_POST['produit'],$_POST['quantite'],$_POST['adresse']);
+	$livraisonC->modifierlivraison($livraison,$_POST['identifiant']);
 	echo $_POST['identifiant'];
-	header('Location: afficherrr.php');
+	header('Location: afficherr.php');
+	include "../Nexmo/src/NexmoMessage.php" ;
+
+
+	
+
+/**
+	 * To send a text message.
+	 *
+	 */
+
+	// Step 1: Declare new NexmoMessage.
+	$nexmo_sms = new NexmoMessage('b951a336','E4pW6SpfCUuU9YMW');
+
+	// Step 2: Use sendText( $to, $from, $message ) method to send a message. 
+	$info = $nexmo_sms->sendText( '21652363503', 'Wapi', 'vos donnees ont été modifiés ' );
+
+	// Step 3: Display an overview of the message
+	
+
+	// Done!  
+}
 }
 ?>
 </body>

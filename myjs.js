@@ -1,63 +1,57 @@
-/* Controlle de saisir page Commande */
-
-function test1(){
-
-var nom = ff.nom.value;
-var prenom = ff.prenom.value;
-var numtelephone = ff.numtelephone.value;
-var adresse = ff.adresse.value;
-var cmd = ff.cmd.value;
-var numcommande = ff.numcommande.value;
-var etatcommande = ff.etatcommande.value;
+function test(){
+var nom = f.nom.value;
+var prenom = f.prenom.value;
+var datedenaissance = f.datedenaissance.value;
+var numerodetelephone = f.numerodetelephone.value;
+var adresse = f.adresse.value;
+var salaire = f.salaire.value;
+var heuredetravail = f.heuredetravail.value;
+var datedetravail = f.datedetravail.value;
 
 
-
-if(nom.length== 0)
+if( nom.length== 0)
 {
-alert("saisir le nom d'utilisateur ");	
+alert("saisir le nom de livreur");
 }
-
-else if( prenom.length== 0)
+else if(prenom.length== 0)
 {
-alert("Saisir votre prenom ");
-} 
-
-else if( numtelephone.length== 0)
+alert("saisir le prenom de livreur ");	
+}
+else if(datedenaissance.length== 0)
 {
-alert("Saisir votre numero telephone ");
-} 
-
+alert("saisir la date de naissance de livreur");	
+}
+else if(numerodetelephone.length== 0)
+{
+alert("saisir le  numero de telephone de livreur");
+}
 else if( adresse.length== 0)
 {
-alert("Saisir votre adresse");
-} 
-
-
-else if( cmd.length== 0)
-{
-alert("Saisir votre commande");
-} 
-
-else if( numcommande.length== 0)
-{
-alert("Saisir le numero du commande");
-} 
-
-else if( etatcommande.length== 0)
-{
-alert("Saisir l'état du commande");
+alert("saisir l'adresse de livreur");	
 }
-
+else if(salaire.length== 0)
+{
+alert("saisir le salaire de livreur ");	
+}
+else if(heuredetravail.length== 0)
+{
+alert("saisir l'heure de travail de livreur");	
+}
+else if(datedetravail.length== 0)
+{
+alert("saisir la date de travail de livreur");	
+}
 else
 {
-alert('Bienvenue') ;
-ff.nom.value="";
-ff.prenom.value="";
-ff.numtelephone.value="";
-ff.adresse.value="";
-ff.cmd.value="";
-ff.numcommande.value="";
-ff.etatcommande.value="";
+alert('ajout avec succées') ;
+f.nom.value="";
+f.prenom.value="";
+f.datedenaissance.value="";
+f.numerodetelephone.value="";
+f.adresse.value="";
+f.salaire.value="";
+f.heuredetravail.value="";
+f.datedetravail.value="";
 }
 
 }

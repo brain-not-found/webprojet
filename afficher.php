@@ -1,4 +1,60 @@
 
+<?PHP
+include "../core/voitureC.php";
+$voiture1C=new voitureC();
+$listevoitures=$voiture1C->affichervoitures();
+
+//var_dump($listeEmployes->fetchAll());
+?>
+<?php
+if($_POST['tri']=='alphabet'){
+$listevoitures=$voiture1C->afficheralpha();
+}
+else if($_POST['tri']=='matricule'){
+$listevoitures=$voiture1C->affichermatricule();
+}
+?>
+
+<br><br><br><br>
+<table class="tablexx">
+<tr>
+<td>matricule</td>
+<td>marque</td>
+<td>chauffeur</td>
+<td>livraison</td>
+<td>supprimer</td>
+<td>modifier</td>
+</tr>
+
+<?PHP
+foreach($listevoitures as $row){
+    ?>
+    <tr>
+    <td><?PHP echo $row['matricule']; ?></td>
+    <td><?PHP echo $row['marque']; ?></td>
+    <td><?PHP echo $row['chauffeur']; ?></td>
+    <td><?PHP echo $row['livraison']; ?></td>
+    <td><form method="POST" action="supprimervoiture.php">
+    <input type="submit" name="supprimer" value="supprimer">
+    <input type="hidden" value="<?PHP echo $row['matricule']; ?>" name="matricule">
+    </form>
+    </td>
+    <td><a href="modifiervoiture.php?matricule=<?PHP echo $row['matricule']; ?>">
+    Modifier</a></td>
+    </tr>
+    
+    <?PHP
+}
+?>
+</table>
+<p><br>.<br></p>
+<form method="POST">
+    <select name="tri">
+        <option value="alphabet">alphabet</option>
+        <option value="matricule">matricule</option>
+    </select>
+    <input type="submit" name="pizza" value="=trier" class="validerxxx">
+</form>
 
 <!DOCTYPE html>
 <html>
@@ -170,9 +226,58 @@
         <!-- #END# Right Sidebar -->
     
                 </section>
+                <form method="POST" action="impress1.php">
+                <label class="validerxxx"><input type="submit" name="button" value="pdf" class="validerxxx"  href="impress1.php"></label>
+            </form>
                 <br><br><br><br>
-                <label class="validerxxx"><input type="submit" name="button" value="rechercher" class="validerxxx" ></label>
+                <form method="POST">
+                                            <table class="tablexx">
+                                                <tr><td><input type="text" name="rech" ></td><td>
+
+
+
+
                 
+                <label class="validerxxx"><input type="submit" name="button" value="rechercher" class="validerxxx" ></label>
+                </form></td></tr></table>
+                
+                <table class="tablexx">
+<tr>
+<td>matricule</td>
+<td>marque</td>
+<td>chauffeur</td>
+<td>livraison</td>
+<td>supprimer</td>
+<td>modifier</td>
+</tr>
+
+<?PHP
+if (isset($_POST['rech'])) {
+
+    
+    $voiture=$voiture1C->recuperervoiture($_POST['rech']);
+foreach($voiture as $row){
+    ?>
+    <tr>
+    <td><?PHP echo $row['matricule']; ?></td>
+    <td><?PHP echo $row['marque']; ?></td>
+    <td><?PHP echo $row['chauffeur']; ?></td>
+    <td><?PHP echo $row['livraison']; ?></td>
+    <td><form method="POST" action="supprimervoiture.php">
+    <input type="submit" name="supprimer" value="supprimer">
+    <input type="hidden" value="<?PHP echo $row['matricule']; ?>" name="matricule">
+    </form>
+    </td>
+    <td><a href="modifiervoiture.php?matricule=<?PHP echo $row['matricule']; ?>">
+    Modifier</a></td>
+    </tr>
+    
+    <?PHP
+}
+}
+?>
+</table>
+
                 
                 <a class="validerxx" href="gestionlivraison.php">retour</a>
                 </div>
@@ -225,43 +330,6 @@
     <script src="js/demo.js"></script>
 </body>
 </html>
-<?PHP
-include "../core/voitureC.php";
-$voiture1C=new voitureC();
-$listevoitures=$voiture1C->affichervoitures();
 
-//var_dump($listeEmployes->fetchAll());
-?>
-<br><br><br><br>
 
-<table border="1">
-<tr>
-<td>matricule</td>
-<td>marque</td>
-<td>chauffeur</td>
-<td>livraison</td>
-<td>supprimer</td>
-<td>modifier</td>
-</tr>
 
-<?PHP
-foreach($listevoitures as $row){
-    ?>
-    <tr>
-    <td><?PHP echo $row['matricule']; ?></td>
-    <td><?PHP echo $row['marque']; ?></td>
-    <td><?PHP echo $row['chauffeur']; ?></td>
-    <td><?PHP echo $row['livraison']; ?></td>
-    <td><form method="POST" action="supprimervoiture.php">
-    <input type="submit" name="supprimer" value="supprimer">
-    <input type="hidden" value="<?PHP echo $row['matricule']; ?>" name="matricule">
-    </form>
-    </td>
-    <td><a href="modifiervoiture.php?cin=<?PHP echo $row['matricule']; ?>">
-    Modifier</a></td>
-    </tr>
-    
-    <?PHP
-}
-?>
-</table>

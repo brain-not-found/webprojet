@@ -19,7 +19,7 @@ if (isset($_GET['cin'])){
 		$heuredetravail=$row['heuredetravail'];
 		$datedetravail=$row['datedetravail'];
 ?>
-<form method="POST" accept="affiche.php">
+<form method="POST">
 <table>
 <caption>modifier livreur</caption>
 <tr>
@@ -36,7 +36,7 @@ if (isset($_GET['cin'])){
 </tr>
 <tr>
 <td>date de naissance</td>
-<td><input type="texy" name="datedenaissance" value="<?PHP echo $datedenaissance ?>"></td>
+<td><input type="text" name="datedenaissance" value="<?PHP echo $datedenaissance ?>"></td>
 </tr>
 <tr>
 <td>nuemro de telephone</td>
@@ -73,9 +73,30 @@ if (isset($_GET['cin'])){
 }
 if (isset($_POST['modifier'])){
 	$livreur=new livreur($_POST['cin'],$_POST['nom'],$_POST['prenom'],$_POST['datedenaissance'],$_POST['numerodetelephone'],$_POST['adresse'],$_POST['salaire'],$_POST['heuredetravail'],$_POST['datedetravail']);
-	$livreurC->modifierlivreur($employe,$_POST['cin']);
+	$livreurC->modifierlivreur($livreur,$_POST['cin']);
 	echo $_POST['cin'];
-	header('Location: affichelivreur.php');
+	header('Location: affiche.php');
+	include "../Nexmo/src/NexmoMessage.php" ;
+
+
+	
+
+/**
+	 * To send a text message.
+	 *
+	 */
+
+	// Step 1: Declare new NexmoMessage.
+	$nexmo_sms = new NexmoMessage('b951a336','E4pW6SpfCUuU9YMW');
+
+	// Step 2: Use sendText( $to, $from, $message ) method to send a message. 
+	$info = $nexmo_sms->sendText( '21652363503', 'Wapi', 'vos donnees ont été modifiés ' );
+
+	// Step 3: Display an overview of the message
+	
+
+	// Done!  
+}
 }
 ?>
 </body>

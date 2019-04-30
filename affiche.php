@@ -1,3 +1,76 @@
+<?PHP
+include "../core/livreurC.php";
+$livreur1C=new livreurC();
+$listelivreurs=$livreur1C->afficherlivreurs();
+
+//var_dump($listeEmployes->fetchAll());
+
+?>
+
+<?php 
+if($_POST['tri']=='alphabet'){
+$listelivreurs=$livreur1C->afficheralpha();
+}
+else if($_POST['tri']=='salaire'){
+$listelivreurs=$livreur1C->affichersalaire();
+}
+
+ ?>
+<br><br><br><br>
+
+<table class="tablexx">
+<tr>
+<td>Cin</td>
+<td>Nom</td>
+<td>Prenom</td>
+<td>datedenaissance</td>
+<td>numerodetelephone</td>
+<td>adresse</td>
+<td>salaire</td>
+<td>heuredetravail</td>
+<td>datedetravail</td>
+<td>supprimer</td>
+<td>modifier</td>
+</tr>
+
+<?PHP
+foreach($listelivreurs as $row){
+    ?>
+    <tr>
+    <td><?PHP echo $row['cin']; ?></td>
+    <td><?PHP echo $row['nom']; ?></td>
+    <td><?PHP echo $row['prenom']; ?></td>
+    <td><?PHP echo $row['datedenaissance']; ?></td>
+    <td><?PHP echo $row['numerodetelephone']; ?></td>
+    <td><?PHP echo $row['adresse']; ?></td>
+    <td><?PHP echo $row['salaire']; ?></td>
+    <td><?PHP echo $row['heuredetravail']; ?></td>
+    <td><?PHP echo $row['datedetravail']; ?></td>
+    <td><form method="POST" action="supprimerlivreur.php">
+    <input type="submit" name="supprimer" value="supprimer" >
+    <input type="hidden" value="<?PHP echo $row['cin']; ?>" name="cin">
+    </form>
+    </td>
+    <td><a href="modifierlivreur.php?cin=<?PHP echo $row['cin']; ?>">
+    Modifier</a></td>
+    </tr>
+    
+    <?PHP
+}
+?>
+</table>
+
+<p><br>.<br></p>
+<form method="POST">
+    <select name="tri">
+        <option value="alphabet">alphabet</option>
+        <option value="salaire">Salaire</option>
+    </select>
+    <input type="submit" name="pizza" value="=trier" class="validerxxx">
+</form>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -168,16 +241,76 @@
         <!-- #END# Right Sidebar -->
     
                 </section>
+                <form method="POST" action="impress.php">
+                <label class="validerxxx"><input type="submit" name="button" value="pdf" class="validerxxx"  href="impress.php"></label>
+            </form>
                 <br><br><br><br>
+                <form method="POST">
+                                            <table class="tablexx">
+
+                <tr><td><input type="text" name="rech" ></td><td>
                 <label class="validerxxx"><input type="submit" name="button" value="rechercher" class="validerxxx" ></label>
+                </form></td></tr></table>
                 
-                
+                <table class="tablexx">
+<tr>
+<td>Cin</td>
+<td>Nom</td>
+<td>Prenom</td>
+<td>datedenaissance</td>
+<td>numerodetelephone</td>
+<td>adresse</td>
+<td>salaire</td>
+<td>heuredetravail</td>
+<td>datedetravail</td>
+<td>supprimer</td>
+<td>modifier</td>
+</tr>
+
+<?PHP
+if (isset($_POST['rech'])) {
+    
+$livreur=$livreur1C->recupererlivreur($_POST['rech']);
+foreach($livreur as $row){
+    ?>
+    <tr>
+    <td><?PHP echo $row['cin']; ?></td>
+    <td><?PHP echo $row['nom']; ?></td>
+    <td><?PHP echo $row['prenom']; ?></td>
+    <td><?PHP echo $row['datedenaissance']; ?></td>
+    <td><?PHP echo $row['numerodetelephone']; ?></td>
+    <td><?PHP echo $row['adresse']; ?></td>
+    <td><?PHP echo $row['salaire']; ?></td>
+    <td><?PHP echo $row['heuredetravail']; ?></td>
+    <td><?PHP echo $row['datedetravail']; ?></td>
+    <td><form method="POST" action="supprimerlivreur.php">
+    <input type="submit" name="supprimer" value="supprimer" >
+    <input type="hidden" value="<?PHP echo $row['cin']; ?>" name="cin">
+    </form>
+    </td>
+    <td><a href="modifierlivreur.php?cin=<?PHP echo $row['cin']; ?>">
+    Modifier</a></td>
+    </tr>
+    
+    <?PHP
+}
+
+}
+
+?>
+</table>
+
+
+
+
+
                 <a class="validerxx" href="gestionlivraison.php">retour</a>
                 </div>
                     </div>
                 </div>
             </div>
             </div>
+            
 
     </section>
 
@@ -223,52 +356,5 @@
     <script src="js/demo.js"></script>
 </body>
 </html>
-<?PHP
-include "../core/livreurC.php";
-$livreur1C=new livreurC();
-$listelivreur=$livreur1C->afficherlivreur();
 
-//var_dump($listeEmployes->fetchAll());
-?>
-<br><br><br><br>
-
-<table border="1">
-<tr>
-
-<td>cin</td>
-<td>nom</td>
-<td>prenom</td>
-<td>datedenaissance</td>
-<td>nuemrodetelephone</td>
-<td>adresse</td>
-<td>salaire</td>
-<td>heuredetravail</td>
-<td>datedetravail</td>
-</tr>
-
-<?PHP
-foreach($listelivreur as $row){
-    ?>
-    <tr>
-    <td><?PHP echo $row['cin']; ?></td>
-    <td><?PHP echo $row['nom']; ?></td>
-    <td><?PHP echo $row['prenom']; ?></td>
-    <td><?PHP echo $row['datedenaissance']; ?></td>
-    <td><?PHP echo $row['nuemrodetelephone']; ?></td>
-    <td><?PHP echo $row['adresse']; ?></td>
-    <td><?PHP echo $row['salaire']; ?></td>
-    <td><?PHP echo $row['heuredetravail']; ?></td>
-    <td><?PHP echo $row['datedetravail']; ?></td>
-    <td><form method="POST" action="supprimerlivreur.php">
-    <input type="submit" name="supprimer" value="supprimer">
-    <input type="hidden" value="<?PHP echo $row['cin']; ?>" name="cin">
-    </form>
-    </td>
-    <td><a href="modifierlivreur.php?cin=<?PHP echo $row['cin']; ?>">
-    Modifier</a></td>
-    </tr>
-    
-    <?PHP
-}
-?>
 </table>

@@ -1,4 +1,76 @@
-﻿
+<?PHP
+include "../core/livraisonnC.php";
+$livraisonn1C=new livraisonnC();
+$listelivraisonns=$livraisonn1C->afficherlivraisonns();
+
+//var_dump($listelivraisonns->fetchAll());
+
+?>
+
+
+<?php 
+if($_POST['tri']=='alphabet'){
+$listelivraisonns=$livraisonn1C->afficheralpha();
+}
+else if($_POST['tri']=='salaire'){
+$listelivraisonns=$livraisonn1C->affichercin();
+}
+
+ ?>
+ 
+
+
+    <br><br><br><br><br>
+<table class="tablexx">
+<tr>
+<td>Cin</td>
+<td>Nom</td>
+<td>Prenom</td>
+<td>tel</td>
+<td>adresse</td>
+<td>produits</td>
+<td>supprimer</td>
+<td>modifier</td>
+</tr>
+
+<?PHP
+foreach($listelivraisonns as $row){
+    ?>
+
+
+    <tr>
+    <td><?PHP echo $row['cin']; ?></td>
+    <td><?PHP echo $row['nom']; ?></td>
+    <td><?PHP echo $row['prenom']; ?></td>
+    <td><?PHP echo $row['tel']; ?></td>
+    <td><?PHP echo $row['adresse']; ?></td>
+    <td><?PHP echo $row['produits']; ?></td>
+    <td><form method="POST" action="supprimerlivraisonn.php">
+    <input type="submit" name="supprimer" value="supprimer" >
+    <input type="hidden" value="<?PHP echo $row['cin']; ?>" name="cin">
+    </form>
+    </td>
+    <td><a href="modifierlivraisonn.php?cin=<?PHP echo $row['cin']; ?>">
+    Modifier</a></td>
+    </tr>
+    
+    <?PHP
+}
+?>
+</table>
+
+<p><br>.<br></p>
+<form method="POST">
+    <select name="tri">
+        <option value="alphabet">alphabet</option>
+        <option value="cin">cin</option>
+    </select>
+    <input type="submit" name="pizza" value="=trier" class="validerxxx">
+</form>
+
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,7 +144,6 @@
                 <a href="javascript:void(0);" class="bars"></a>
                 <a class="navbar-brand" href="index.html">Gestion de Livraison </a>
             </div>
-            <a href="formulaireconnexion.html">logout</a>
             <div class="collapse navbar-collapse" id="navbar-collapse">
                     <!-- Call Search -->
 
@@ -169,158 +240,66 @@
        
         <!-- #END# Right Sidebar -->
     
-                </section>
-
-                       
-    <section class="content">
-        <div class="container-fluid">
-            <div class="block-header">
-                <h2>Livraison</h2>
-            </div>
-            <form method="POST" action="afficherlivraison.php">
-                       <label class="validerxx" class="valider3x"><input type="submit" name="button" value="voir livraisons" class="validerxx" href="afficherlivraison.php"></label>
-                   </form>
-            <!-- Body Copy -->
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2>
-                                Livreurs
-                            </h2>
-                            <ul class="header-dropdown m-r--5">
-                               
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        
-                        <form method="POST" action="ajout.php">
-                      
-  <label class="validerxx" class="valider3x"><input type="submit" name="button" value="ajouter" class="validerxx" href="ajout.php"></label>
-
-</form>
-<form method="POST" action="affiche.php">
-     <label class="validerxxx"><input type="submit" name="button" value="afficher" class="validerxxx" href="affiche.php"></label>
-</form>
-<form method="POST" action="Statistique.php">
-                      
-  <label class="validerxx" class="valider3x"><input type="submit" name="button" value="Statistique" class="validerxx" href="Statistique.php"></label>
-
-</form>
-  
-  
-
-                      <div class="body">
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #END# Body Copy -->
-            <!-- Headings -->
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2>
-                                voitures
-                            </h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="javascript:void(0);">Action</a></li>
-                                        <li><a href="javascript:void(0);">Another action</a></li>
-                                        <li><a href="javascript:void(0);">Something else here</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <form method="POST" action="ajouter.php">
-                         
-  <label class="validerxx" class="valider3x"><input type="submit" name="button" value="ajouter" class="validerxx"></label>
-</form>
-<form method="POST" action="afficher.php">
-     <label class="validerxxx"><input type="submit" name="button" value="afficher" class="validerxxx" href="afficher.php"></label>
-</form>
-
-  
-                        <div class="body">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #END# Headings -->
-            <!-- Text Styles -->
-            <div class="row clearfix">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="card">
-                        <div class="header">
-                            <h2>
-                                Livraison
-                            </h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        <i class="material-icons">more_vert</i>
-                                    </a>
-                                    <ul class="dropdown-menu pull-right">
-                                        <li><a href="javascript:void(0);">Action</a></li>
-                                        <li><a href="javascript:void(0);">Another action</a></li>
-                                        <li><a href="javascript:void(0);">Something else here</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        
-
-                        <form method="POST" action="ajouterr.php">
-                        
-  <label class="validerxx" class="valider3x"><input type="submit" name="button" value="ajouter" class="validerxx"></label>
-</form>
-<form method="POST" action="afficherr.php">
-     <label class="validerxxx"><input type="submit" name="button" value="afficher" class="validerxxx" href="afficherr.php"></label>
-</form>
-
-  
-                        <div class="body">
-                           
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #END# Text Styles -->
-            <!-- Blockquotes -->
-            
-            <!-- #END# Blockquotes -->
-            <!-- Unordered List -->
-            
-                       </form>
-            <!-- #END# Unordered List -->
-        </div>
+                
     </section>
+    <form method="POST" action="impress3.php">
+                <label class="validerxxx"><input type="submit" name="button" value="pdf" class="validerxxx"  href="impress3.php"></label>
+            </form>
+                <br><br><br><br>
+                <form method="POST">
+                                            <table class="tablexx">
 
-            <!-- Widgets -->
-            
-                <!-- #END# Answered Tickets -->
-            
-                <!-- Task Info -->
-               
-                <!-- #END# Task Info -->
-                <!-- Browser Usage -->
-               
-                <!-- #END# Browser Usage -->
-            </div>
-        </div>
-    </section>
+                <tr><td><input type="text" name="rech" ></td><td>
+                <label class="validerxxx"><input type="submit" name="button" value="rechercher" class="validerxxx" ></label>
+                </form></td></tr></table>
+                
+                <table class="tablexx">
+<tr>
+<td>Cin</td>
+<td>Nom</td>
+<td>Prenom</td>
+<td>tel</td>
+<td>adresse</td>
+<td>produits</td>
 
-    <!-- Jquery Core Js -->
+</tr>
+
+<?PHP
+if (isset($_POST['rech'])) {
+    
+$livraisonn=$livraisonn1C->recupererlivraisonn($_POST['rech']);
+foreach($livraisonn as $row){
+    ?>
+    <tr>
+    <td><?PHP echo $row['cin']; ?></td>
+    <td><?PHP echo $row['nom']; ?></td>
+    <td><?PHP echo $row['prenom']; ?></td>
+    <td><?PHP echo $row['tel']; ?></td>
+    <td><?PHP echo $row['adresse']; ?></td>
+    <td><?PHP echo $row['produits']; ?></td>
+    <td><form method="POST" action="supprimerlivraisonn.php">
+    <input type="submit" name="supprimer" value="supprimer" >
+    <input type="hidden" value="<?PHP echo $row['cin']; ?>" name="cin">
+    </form>
+    </td>
+    <td><a href="modifierlivraisonn.php?cin=<?PHP echo $row['cin']; ?>">
+    Modifier</a></td>
+    </tr>
+    
+    <?PHP
+}
+
+}
+
+?>
+</table>
+
+
+
+
+
+                <a class="validerxx" href="gestionlivraison.php">retour</a>
+
     <script src="plugins/jquery/jquery.min.js"></script>
 
     <!-- Bootstrap Core Js -->
@@ -361,6 +340,7 @@
 
     <!-- Demo Js -->
     <script src="js/demo.js"></script>
-    <script src="controlesaisie.js"></script>
 </body>
 </html>
+
+</table>

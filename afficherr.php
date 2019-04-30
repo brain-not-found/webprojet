@@ -1,4 +1,61 @@
 
+<?PHP
+include "../core/livraisonC.php";
+$livraison1C=new livraisonC();
+$listelivraisons=$livraison1C->afficherlivraisons();
+
+//var_dump($listeEmployes->fetchAll());
+?>
+<?php
+if($_POST['tri']=='alphabet'){
+$listelivraisons=$livraison1C->afficheralpha();
+}
+else if($_POST['tri']=='identifiant'){
+$listelivraisons=$livraison1C->afficheridentifiant();
+}
+?>
+
+<br><br><br><br>
+<table class="tablexx">
+<tr>
+<td>identifiant</td>
+<td>produit</td>
+<td>quantite</td>
+<td>adresse</td>
+<td>supprimer</td>
+<td>modifier</td>
+</tr>
+
+<?PHP
+foreach($listelivraisons as $row){
+    ?>
+    <tr>
+    <td><?PHP echo $row['identifiant']; ?></td>
+    <td><?PHP echo $row['produit']; ?></td>
+    <td><?PHP echo $row['quantite']; ?></td>
+    <td><?PHP echo $row['adresse']; ?></td>
+    <td>
+        <form method="POST" action="supprimerlivraison.php">
+    <input type="submit" name="supprimer" value="supprimer">
+    <input type="hidden" value="<?PHP echo $row['identifiant']; ?>" name="identifiant">
+    </form>
+    </td>
+    <td><a href="modifierlivraison.php?identifiant=<?PHP echo $row['identifiant']; ?>">
+    Modifier</a></td>
+    </tr>
+    
+    <?PHP
+}
+?>
+</table>
+<p><br>.<br></p>
+<form method="POST">
+    <select name="tri">
+        <option value="alphabet">alphabet</option>
+        <option value="cin">cin</option>
+    </select>
+    <input type="submit" name="pizza" value="=trier" class="validerxxx">
+</form>
 
 <!DOCTYPE html>
 <html>
@@ -170,10 +227,60 @@
         <!-- #END# Right Sidebar -->
     
                 </section>
+                <form method="POST" action="impress2.php">
+                <label class="validerxxx"><input type="submit" name="button" value="pdf" class="validerxxx"  href="impress2.php"></label>
+            </form>
                 <br><br><br><br>
+
+                <form method="POST">
+                                            <table class="tablexx">
+                                                <tr><td><input type="text" name="rech" ></td><td>
+
+
+
                 <label class="validerxxx"><input type="submit" name="button" value="rechercher" class="validerxxx" ></label>
-                <form method="POST" action="trierlivreur.php">
-                <label class="validerxxx"><input type="submit" name="button" value="trier" class="validerxxx" href="trierlivreur.php"></label>
+                </form></td></tr></table>
+                
+
+
+
+
+                <table class="tablexx">
+<tr>
+<td>identifiant</td>
+<td>produit</td>
+<td>quantite</td>
+<td>adresse</td>
+<td>supprimer</td>
+<td>modifier</td>
+</tr>
+
+<?PHP
+if (isset($_POST['rech'])) {
+    $livraison=$livraison1C->recupererlivraison($_POST['rech']);
+foreach($livraison as $row){
+    ?>
+    <tr>
+    <td><?PHP echo $row['identifiant']; ?></td>
+    <td><?PHP echo $row['produit']; ?></td>
+    <td><?PHP echo $row['quantite']; ?></td>
+    <td><?PHP echo $row['adresse']; ?></td>
+    <td>
+        <form method="POST" action="supprimerlivraison.php">
+    <input type="submit" name="supprimer" value="supprimer">
+    <input type="hidden" value="<?PHP echo $row['identifiant']; ?>" name="identifiant">
+    </form>
+    </td>
+    <td><a href="modifierlivraison.php?identifiant=<?PHP echo $row['identifiant']; ?>">
+    Modifier</a></td>
+    </tr>
+    
+    <?PHP
+}
+}
+?>
+</table>
+
                 <a class="validerxx" href="gestionlivraison.php">retour</a>
             </form>
                 </div>
@@ -226,44 +333,7 @@
     <script src="js/demo.js"></script>
 </body>
 </html>
-<?PHP
-include "../core/livraisonC.php";
-$livraison1C=new livraisonC();
-$listelivraisons=$livraison1C->afficherlivraisons();
 
-//var_dump($listeEmployes->fetchAll());
-?>
-<br><br><br><br>
 
-<table calass="tablexx" border="1">
-<tr>
-<td>identifiant</td>
-<td>produit</td>
-<td>quantite</td>
-<td>adresse</td>
-<td>supprimer</td>
-<td>modifier</td>
-</tr>
 
-<?PHP
-foreach($listelivraisons as $row){
-	?>
-	<tr>
-	<td><?PHP echo $row['identifiant']; ?></td>
-	<td><?PHP echo $row['produit']; ?></td>
-	<td><?PHP echo $row['quantite']; ?></td>
-	<td><?PHP echo $row['adresse']; ?></td>
-	<td>
-        <form method="POST" action="supprimerlivraison.php">
-	<input type="submit" name="supprimer" value="supprimer">
-	<input type="hidden" value="<?PHP echo $row['identifiant']; ?>" name="identifiant">
-	</form>
-	</td>
-	<td><a href="modifierlivraison.php?cin=<?PHP echo $row['identifiant']; ?>">
-	Modifier</a></td>
-	</tr>
-	
-	<?PHP
-}
-?>
-</table>
+
